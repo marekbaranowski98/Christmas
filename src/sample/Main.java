@@ -22,7 +22,8 @@ public class Main extends Application {
         root.setAlignment(Pos.CENTER);
         root.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
-        primaryStage.setScene(new Scene(root, 350, 500));
+        primaryStage.setScene(new Scene(root, 650, 700));
+
         primaryStage.show();
     }
 

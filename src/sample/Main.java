@@ -22,6 +22,7 @@ public class Main extends Application {
         root.setAlignment(Pos.CENTER);
         root.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
+        Tree tree = new Tree();
         primaryStage.setScene(new Scene(root, 650, 700));
 
         primaryStage.show();

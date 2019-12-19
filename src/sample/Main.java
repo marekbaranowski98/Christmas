@@ -26,6 +26,8 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 650, 700));
 
         primaryStage.show();
+        root.getChildren().addAll(tree.drawTree(5));
+
     }
 
     public static void main(String[] args) {

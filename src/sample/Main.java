@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -11,7 +12,9 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-
+/**
+ * @author Marek Baranowski
+ */
 public class Main extends Application {
 
     @Override
@@ -22,8 +25,10 @@ public class Main extends Application {
         root.setAlignment(Pos.CENTER);
         root.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
-        Tree tree = new Tree();
-        primaryStage.setScene(new Scene(root, 650, 700));
+
+        Dimension2D dimension2D = new Dimension2D(650, 700);
+        Tree tree = new Tree(dimension2D);
+        primaryStage.setScene(new Scene(root, dimension2D.getWidth(), dimension2D.getHeight()));
 
         primaryStage.show();
         root.getChildren().addAll(tree.drawTree(5));

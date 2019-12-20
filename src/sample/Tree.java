@@ -7,6 +7,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+import java.util.Random;
+
 public class Tree {
   private interface LineTree {
     String getLine(int n);
@@ -15,12 +17,13 @@ public class Tree {
   private final Color colorOfBranch;
   private final Color colorOfLeaves;
   private final Dimension2D dimension2D;
-  private final int marginTop = 10;
+  private final int marginTop = 30;
   private final Font font = new Font("Comic Sans MS Bold", 15);
   private final String node = "|###|";
+  private final int chanceToGenerete = 4;
 
-  public Tree() {
-    dimension2D = new Dimension2D(650, 700);
+  public Tree(Dimension2D dimension2D) {
+    this.dimension2D = dimension2D;
     token = '+';
     colorOfBranch = Color.SADDLEBROWN;
     colorOfLeaves = Color.GREEN;
@@ -51,8 +54,6 @@ public class Tree {
     GraphicsContext gc = canvasWithTree.getGraphicsContext2D();
 
 
-    gc.setFill(colorOfLeaves);
-
     gc.setFont(font);
 
     int topLevel = 1;
@@ -60,12 +61,26 @@ public class Tree {
 
     for (i = 0; i < N; i++) {
       for (j = 1; j <= 8; j++) {
+        gc.setFill(colorOfLeaves);
         String tmp = line.getLine(topLevel);
         topLevel += 2;
 
         Text tmpText = new Text(tmp);
         tmpText.setFont(font);
-        gc.fillText(tmp, (dimension2D.getWidth() - tmpText.getLayoutBounds().getWidth())/ 2, (j + i * 8) * 15 + marginTop);
+        int lineWidth = (int)tmpText.getLayoutBounds().getWidth();
+        int y = (j + i * 8) * 15 + marginTop;
+        int x = (int)(dimension2D.getWidth() - tmpText.getLayoutBounds().getWidth())/ 2;
+
+        gc.fillText(tmp, x, y);
+
+        Bauble[] baubles = genereteBaubles(lineWidth, tmp.length() > 3 ? tmp.length() : 3);
+        for (int k = 0; k < baubles.length; k++) {
+          if (baubles[k] != null) {
+            gc.setFill(baubles[k].colors[baubles[k].getNumberOfColors()]);
+            gc.fillOval(x + baubles[k].getX(), y-7, baubles[k].size, baubles[k].size);
+          }
+        }
+
       }
       topLevel -= 6;
     }
@@ -80,6 +95,39 @@ public class Tree {
 
       gc.fillText(node, (dimension2D.getWidth() - tmpText.getLayoutBounds().getWidth()) / 2, (k + (j + i * 8))*15 + marginTop);
     }
+
+    Star star = new Star(dimension2D.getWidth()/2, 30, 5);
+    gc.setFill(star.color);
+    gc.fillPolygon(star.x, star.y, star.n);
     return canvasWithTree;
+  }
+
+  public Bauble[] genereteBaubles(int lengthOfBranch, int count) {
+    Bauble[] baubles = new Bauble[count - 3];
+
+    for(int i = 0; i < count - 3; i++) {
+      boolean repeatBauble = false;
+
+      Random random = new Random();
+      if(random.nextInt(chanceToGenerete) == chanceToGenerete-1) {
+        baubles[i] = new Bauble(10);
+        baubles[i].genereteBauble((int)(lengthOfBranch));
+
+        int j = i - 1;
+        while (j>=0) {
+          if ((baubles[j] != null) && Math.abs(baubles[i].getX() - baubles[j].getX()) < baubles[i].size + 5) {
+            repeatBauble = true;
+          }
+          j--;
+        }
+        if(repeatBauble) {
+          i--;
+        }
+      }else {
+        baubles[i] = null;
+      }
+    }
+
+    return baubles;
   }
 }

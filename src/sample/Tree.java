@@ -15,7 +15,7 @@ public class Tree {
   private final Color colorOfBranch;
   private final Color colorOfLeaves;
   private final Dimension2D dimension2D;
-  private final int marginTop = 10;
+  private final int marginTop = 30;
   private final Font font = new Font("Comic Sans MS Bold", 15);
   private final String node = "|###|";
 
@@ -52,7 +52,6 @@ public class Tree {
 
 
     gc.setFill(colorOfLeaves);
-
     gc.setFont(font);
 
     int topLevel = 1;
@@ -80,6 +79,10 @@ public class Tree {
 
       gc.fillText(node, (dimension2D.getWidth() - tmpText.getLayoutBounds().getWidth()) / 2, (k + (j + i * 8))*15 + marginTop);
     }
+
+    Star star = new Star(dimension2D.getWidth()/2, 30, 5);
+    gc.setFill(star.color);
+    gc.fillPolygon(star.x, star.y, star.n);
     return canvasWithTree;
   }
 }

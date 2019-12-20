@@ -12,7 +12,9 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-
+/**
+ * @author Marek Baranowski
+ */
 public class Main extends Application {
 
     @Override

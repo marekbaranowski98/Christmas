@@ -55,6 +55,7 @@ public class Tree {
 
 
     gc.setFont(font);
+    gc.setStroke(Color.WHITE);
 
     int topLevel = 1;
     int i, j = 0;
@@ -76,8 +77,9 @@ public class Tree {
         Bauble[] baubles = genereteBaubles(lineWidth, tmp.length() > 3 ? tmp.length() : 3);
         for (int k = 0; k < baubles.length; k++) {
           if (baubles[k] != null) {
+            gc.strokeLine(x + baubles[k].getX() + baubles[k].size/2, y-7, x+baubles[k].getX() + baubles[k].size/2, y-3);
             gc.setFill(baubles[k].colors[baubles[k].getNumberOfColors()]);
-            gc.fillOval(x + baubles[k].getX(), y-7, baubles[k].size, baubles[k].size);
+            gc.fillOval(x + baubles[k].getX(), y-3, baubles[k].size, baubles[k].size);
           }
         }
 

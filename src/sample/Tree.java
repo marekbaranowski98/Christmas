@@ -5,6 +5,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 public class Tree {
   private interface LineTree {
@@ -15,6 +16,7 @@ public class Tree {
   private final Color colorOfLeaves;
   private final Dimension2D dimension2D;
   private final int marginTop = 10;
+  private final Font font = new Font("Comic Sans MS Bold", 15);
 
   public Tree() {
     dimension2D = new Dimension2D(650, 700);
@@ -44,16 +46,24 @@ public class Tree {
 
     Canvas canvasWithTree = new Canvas(dimension2D.getWidth(), dimension2D.getHeight());
 
+
     GraphicsContext gc = canvasWithTree.getGraphicsContext2D();
+
+
     gc.setFill(colorOfLeaves);
-    gc.setFont(new Font(15));
+
+    gc.setFont(font);
+
     int topLevel = 1;
 
     for (int i = 0; i < N; i++) {
       for (int j = 1; j <= 8; j++) {
         String tmp = line.getLine(topLevel);
         topLevel += 2;
-        gc.fillText(tmp, (dimension2D.getWidth() - (tmp.length() * 9)) / 2, (j + i * 8) * 15 + marginTop);
+
+        Text tmpText = new Text(tmp);
+        tmpText.setFont(font);
+        gc.fillText(tmp, (dimension2D.getWidth() - tmpText.getLayoutBounds().getWidth())/ 2, (j + i * 8) * 15 + marginTop);
       }
       topLevel -= 4;
     }

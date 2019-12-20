@@ -19,7 +19,7 @@ public class Tree {
   public Tree() {
     dimension2D = new Dimension2D(650, 700);
     token = '+';
-    colorOfBranch = Color.BROWN;
+    colorOfBranch = Color.SADDLEBROWN;
     colorOfLeaves = Color.GREEN;
   }
 

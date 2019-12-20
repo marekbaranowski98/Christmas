@@ -19,8 +19,8 @@ public class Tree {
   private final Font font = new Font("Comic Sans MS Bold", 15);
   private final String node = "|###|";
 
-  public Tree() {
-    dimension2D = new Dimension2D(650, 700);
+  public Tree(Dimension2D dimension2D) {
+    this.dimension2D = dimension2D;
     token = '+';
     colorOfBranch = Color.SADDLEBROWN;
     colorOfLeaves = Color.GREEN;

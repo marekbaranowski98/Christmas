@@ -17,6 +17,7 @@ public class Tree {
   private final Dimension2D dimension2D;
   private final int marginTop = 10;
   private final Font font = new Font("Comic Sans MS Bold", 15);
+  private final String node = "|###|";
 
   public Tree() {
     dimension2D = new Dimension2D(650, 700);
@@ -55,9 +56,10 @@ public class Tree {
     gc.setFont(font);
 
     int topLevel = 1;
+    int i, j = 0;
 
-    for (int i = 0; i < N; i++) {
-      for (int j = 1; j <= 8; j++) {
+    for (i = 0; i < N; i++) {
+      for (j = 1; j <= 8; j++) {
         String tmp = line.getLine(topLevel);
         topLevel += 2;
 
@@ -65,7 +67,18 @@ public class Tree {
         tmpText.setFont(font);
         gc.fillText(tmp, (dimension2D.getWidth() - tmpText.getLayoutBounds().getWidth())/ 2, (j + i * 8) * 15 + marginTop);
       }
-      topLevel -= 4;
+      topLevel -= 6;
+    }
+
+    i--;
+    j--;
+
+    gc.setFill(colorOfBranch);
+    for(int k = 1; k <= 4; k++) {
+      Text tmpText = new Text(node);
+      tmpText.setFont(font);
+
+      gc.fillText(node, (dimension2D.getWidth() - tmpText.getLayoutBounds().getWidth()) / 2, (k + (j + i * 8))*15 + marginTop);
     }
     return canvasWithTree;
   }

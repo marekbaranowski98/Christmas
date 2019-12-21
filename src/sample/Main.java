@@ -8,12 +8,9 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.*;
 import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import java.io.File;
 
 /**
  * @author Marek Baranowski
@@ -55,7 +52,6 @@ public class Main extends Application {
             producer.stop();
         });
 
-        String musicFile = "src/sample/audio.mp3";  //Wham! Last Christmas
         AudioClip audioClip = new AudioClip(this.getClass().getResource("audio.mp3").toString());
         audioClip.setCycleCount(AudioClip.INDEFINITE);
         audioClip.play();

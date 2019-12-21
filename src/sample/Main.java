@@ -38,7 +38,7 @@ public class Main extends Application {
         tree.drawTree(gc, 5);
 
         Claus claus = new Claus(dimension2D);
-        claus.giveGift(gc, 10);
+        claus.giveGift(gc, 700);
 
         root.getChildren().addAll(canvas);
 

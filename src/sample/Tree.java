@@ -37,7 +37,7 @@ public class Tree {
     this.colorOfLeaves = colorOfLeaves;
   }
 
-  public Canvas drawTree(int N) {
+  public void drawTree(GraphicsContext gc, int N) {
     LineTree line = (int n) -> {
       StringBuilder tmp = new StringBuilder();
 
@@ -47,12 +47,6 @@ public class Tree {
 
       return tmp.toString();
     };
-
-    Canvas canvasWithTree = new Canvas(dimension2D.getWidth(), dimension2D.getHeight());
-
-
-    GraphicsContext gc = canvasWithTree.getGraphicsContext2D();
-
 
     gc.setFont(font);
     gc.setStroke(Color.WHITE);
@@ -74,14 +68,7 @@ public class Tree {
 
         gc.fillText(tmp, x, y);
 
-        Bauble[] baubles = genereteBaubles(lineWidth, tmp.length() > 3 ? tmp.length() : 3);
-        for (int k = 0; k < baubles.length; k++) {
-          if (baubles[k] != null) {
-            gc.strokeLine(x + baubles[k].getX() + baubles[k].size/2, y-7, x+baubles[k].getX() + baubles[k].size/2, y-3);
-            gc.setFill(baubles[k].colors[baubles[k].getNumberOfColors()]);
-            gc.fillOval(x + baubles[k].getX(), y-3, baubles[k].size, baubles[k].size);
-          }
-        }
+        drawBauble(gc, genereteBaubles(lineWidth, Math.max(tmp.length(), 3)), x, y);
 
       }
       topLevel -= 6;
@@ -90,21 +77,13 @@ public class Tree {
     i--;
     j--;
 
-    gc.setFill(colorOfBranch);
-    for(int k = 1; k <= 4; k++) {
-      Text tmpText = new Text(node);
-      tmpText.setFont(font);
-
-      gc.fillText(node, (dimension2D.getWidth() - tmpText.getLayoutBounds().getWidth()) / 2, (k + (j + i * 8))*15 + marginTop);
-    }
+    drawNode(gc, (j + i * 8));
 
     Star star = new Star(dimension2D.getWidth()/2, 30, 5);
-    gc.setFill(star.color);
-    gc.fillPolygon(star.x, star.y, star.n);
-    return canvasWithTree;
+    star.drawStar(gc);
   }
 
-  public Bauble[] genereteBaubles(int lengthOfBranch, int count) {
+  private Bauble[] genereteBaubles(int lengthOfBranch, int count) {
     Bauble[] baubles = new Bauble[count - 3];
 
     for(int i = 0; i < count - 3; i++) {
@@ -131,5 +110,26 @@ public class Tree {
     }
 
     return baubles;
+  }
+
+  private void drawBauble(GraphicsContext gc, Bauble[] baubles, int x, int y) {
+    for (int i = 0; i < baubles.length; i++) {
+      if (baubles[i] != null) {
+        gc.strokeLine(x + baubles[i].getX() + baubles[i].size/2, y-7, x+baubles[i].getX() + baubles[i].size/2, y-3);
+        gc.setFill(baubles[i].colors[baubles[i].getNumberOfColors()]);
+        gc.fillOval(x + baubles[i].getX(), y-3, baubles[i].size, baubles[i].size);
+      }
+    }
+  }
+
+  private void drawNode(GraphicsContext gc, int y) {
+    gc.setFill(colorOfBranch);
+
+    for(int i = 1; i <= 4; i++) {
+      Text tmpText = new Text(node);
+      tmpText.setFont(font);
+
+      gc.fillText(node, (dimension2D.getWidth() - tmpText.getLayoutBounds().getWidth()) / 2, (i + y)*15 + marginTop);
+    }
   }
 }

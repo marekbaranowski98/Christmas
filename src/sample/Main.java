@@ -3,8 +3,9 @@ package sample;
 import javafx.application.Application;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -22,16 +23,24 @@ public class Main extends Application {
         primaryStage.setTitle("Merry Christmas");
 
         FlowPane root = new FlowPane();
-        root.setAlignment(Pos.CENTER);
         root.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
 
         Dimension2D dimension2D = new Dimension2D(650, 700);
-        Tree tree = new Tree(dimension2D);
-        primaryStage.setScene(new Scene(root, dimension2D.getWidth(), dimension2D.getHeight()));
 
+
+        primaryStage.setScene(new Scene(root, dimension2D.getWidth(), dimension2D.getHeight()));
         primaryStage.show();
-        root.getChildren().addAll(tree.drawTree(5));
+        Canvas canvas = new Canvas(dimension2D.getWidth(), dimension2D.getHeight());
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+
+        Tree tree = new Tree(dimension2D);
+        tree.drawTree(gc, 5);
+
+        Claus claus = new Claus(dimension2D);
+        claus.giveGift(gc, 700);
+
+        root.getChildren().addAll(canvas);
 
     }
 

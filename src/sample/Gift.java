@@ -5,12 +5,12 @@ import javafx.scene.paint.Color;
 import java.util.Random;
 
 public class Gift {
-  public final Color[] listOfColorBox = { Color.CRIMSON, Color.DARKORANGE, Color.DARKORCHID, Color.FORESTGREEN, Color.YELLOWGREEN };
-  public final Color[] listOfColorRibbon = { Color.GOLD, Color.GRAY, Color.WHITE };
+  private final Color[] listOfColorBox = { Color.CRIMSON, Color.DARKORANGE, Color.DARKORCHID, Color.FORESTGREEN, Color.YELLOWGREEN };
+  private final Color[] listOfColorRibbon = { Color.GOLD, Color.GRAY, Color.WHITE };
   private int width;
   private int height;
   private Color colorOfBox;
-  private final int sizeOfRibbon = 5;
+  public static final int sizeOfRibbon = 5;
   public static final int minWidth = 30;
   public static final int minHeight = 30;
   private Color colorOfRibbon;
@@ -35,10 +35,6 @@ public class Gift {
 
   public Color getColorOfBox() {
     return colorOfBox;
-  }
-
-  public int getSizeOfRibbon() {
-    return sizeOfRibbon;
   }
 
   public Color getColorOfRibbon() {

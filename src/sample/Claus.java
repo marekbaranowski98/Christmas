@@ -22,6 +22,9 @@ public class Claus {
     for (Gift gift : gifts) {
       gc.setFill(gift.getColorOfBox());
       gc.fillRect(startX,  heightWithEarth-gift.getHeight(), gift.getWidth(), gift.getHeight());
+      gc.setFill(gift.getColorOfRibbon());
+      gc.fillRect(startX, heightWithEarth - (gift.getHeight() + Gift.sizeOfRibbon)/2, gift.getWidth(), Gift.sizeOfRibbon);
+      gc.fillRect(startX + (gift.getWidth() - Gift.sizeOfRibbon)/2, heightWithEarth - gift.getHeight(), Gift.sizeOfRibbon, gift.getHeight());
       startX += gift.getWidth() + breakGift;
     }
   }

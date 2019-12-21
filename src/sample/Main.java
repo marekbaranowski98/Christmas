@@ -39,9 +39,17 @@ public class Main extends Application {
         Canvas canvasWithSnow = new Canvas(dimension2D.getWidth(), dimension2D.getHeight());
         gc = canvasWithSnow.getGraphicsContext2D();
 
-        root.getChildren().addAll(canvasWithSnow, canvasWithTree);
-    }
+        ListSnow listSnow = new ListSnow(dimension2D, 15);
+        Snowing snowing = new Snowing(gc, dimension2D, listSnow);
+        Producer producer = new Producer(listSnow);
 
+        root.getChildren().addAll(canvasWithSnow, canvasWithTree);
+
+        primaryStage.setOnCloseRequest(event -> {
+            snowing.stop();
+            producer.stop();
+        });
+    }
     public static void main(String[] args) {
         launch(args);
     }

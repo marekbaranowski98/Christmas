@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Claus {
   private Dimension2D dimension2D;
-  private final int minNumberGift = 5;
+  private final int minNumberGift = 7;
   private final int maxHeight = 60;
   private final int breakGift = 10;
 

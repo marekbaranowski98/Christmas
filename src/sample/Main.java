@@ -26,8 +26,9 @@ public class Main extends Application {
 
         primaryStage.setScene(new Scene(root, dimension2D.getWidth(), dimension2D.getHeight()));
         primaryStage.show();
-        Canvas canvas = new Canvas(dimension2D.getWidth(), dimension2D.getHeight());
-        GraphicsContext gc = canvas.getGraphicsContext2D();
+
+        Canvas canvasWithTree = new Canvas(dimension2D.getWidth(), dimension2D.getHeight());
+        GraphicsContext gc = canvasWithTree.getGraphicsContext2D();
 
         Tree tree = new Tree(dimension2D);
         tree.drawTree(gc, 5);
@@ -35,7 +36,10 @@ public class Main extends Application {
         Claus claus = new Claus(dimension2D);
         claus.giveGift(gc, 700);
 
-        root.getChildren().addAll(canvas);
+        Canvas canvasWithSnow = new Canvas(dimension2D.getWidth(), dimension2D.getHeight());
+        gc = canvasWithSnow.getGraphicsContext2D();
+
+        root.getChildren().addAll(canvasWithSnow, canvasWithTree);
     }
 
     public static void main(String[] args) {

@@ -25,9 +25,7 @@ public class Main extends Application {
         FlowPane root = new FlowPane();
         root.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
-
         Dimension2D dimension2D = new Dimension2D(650, 700);
-
 
         primaryStage.setScene(new Scene(root, dimension2D.getWidth(), dimension2D.getHeight()));
         primaryStage.show();
@@ -41,7 +39,6 @@ public class Main extends Application {
         claus.giveGift(gc, 700);
 
         root.getChildren().addAll(canvas);
-
     }
 
     public static void main(String[] args) {

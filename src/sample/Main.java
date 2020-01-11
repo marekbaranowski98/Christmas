@@ -7,8 +7,10 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.*;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
 
 /**
  * @author Marek Baranowski
@@ -49,6 +51,10 @@ public class Main extends Application {
             snowing.stop();
             producer.stop();
         });
+
+        AudioClip audioClip = new AudioClip(this.getClass().getResource("audio.mp3").toString());
+        audioClip.setCycleCount(AudioClip.INDEFINITE);
+        audioClip.play();
     }
     public static void main(String[] args) {
         launch(args);
